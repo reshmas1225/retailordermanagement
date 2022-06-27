@@ -1,0 +1,56 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'groovy'
+}
+
+group = 'com.rop.'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+String springBootVersion = '2.6.7'
+String groovyVersion = '3.0.10'
+String spockCoreVersion = '2.1-groovy-3.0'
+
+dependencies {
+    //implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+
+    implementation 'org.codehaus.groovy:groovy'
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation 'org.springframework.kafka:spring-kafka:2.8.7'
+
+    //implementation "org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}"
+    implementation "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation "org.apache.httpcomponents:httpclient:4.5.13"
+
+    implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.4.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.7.0'
+
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Testing
+    testImplementation group: 'org.springframework.batch', name: 'spring-batch-test', version: '4.3.6'
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation "org.spockframework:spock-core:${spockCoreVersion}"
+    testImplementation("org.spockframework:spock-spring:${spockCoreVersion}") {
+        exclude module: 'groovy-all'
+    }
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
